@@ -1,0 +1,108 @@
+java beans
+
+Uma das maiores dificuldades na programação é escrever algoritmos legíveis a niveis que sejam compreendidos por todo seu time ou por você mesmo no futuro. Para isso, a linguagem java sugere, através de convenções, formas de escrita universaç para nossas classes, atributos, métodos e pacotes.
+
+Variáveis
+    Uma variável deve ser clara, sem abrevições ou definição sem sentido
+    
+    Uma variável é sempre no singular, exceto quando se referir a um array ou coleção.
+    
+defina um idioma único para suas variáveis. Se você for declarar variáveis em ingles, defina todas em ingles.
+
+Métodos
+    deverão ser nomeados como verbos, através de camelCase
+
+------------------------------
+
+Tipos de variáveis
+
+Tipos primitivos(não são considerados objetos)
+
+int, byte, short, long, float, double, boolean e char
+
+Esses tipos não são considerados objetos, e portanto, representam valores brutos.
+
+Eles são armazenados diretamente na pilha de memória(Memory stack).
+
+final double salario = 6000.00
+
+o final faz com que a variável fique imutável.
+---------------------------------
+
+Operadores
+
+Simbolos especiais
+
+Operadores aritméticos
+
++ - / *
+
+simbolo de atribuição: simbolo de igual (=)
+
+Operador de adição, quando utilizado em Strings, vai realizar a Concatenação
+
+Operadores unários
+
+Esses operadores são aplicados juntamente com outro operador aritmético. Eles realizam alguns trabalhos básicos como incrementar, decrementar, inverter valores numéricos e booleanos.
+
+Operador unário de valor positivo - Números são positivos sem esse operadore explicitamente.
+
+numero ++ -> Primeiramente a operação vai usar o valor atual do numero, e depois vai incrementar o valor dele, então isso pode poupar uma linha de código:
+
+funcaoTal(numero++) > a função vai ter o valor da variável número, mas o compilador vai aumentar o valor da váriavel após a operação.
+
+Caso a gente queira a incrementação antes da váriavel usar o número, a gente colocar o operador como pre-fixo. assim vai aumentar o valor dele, e o valor dele vai ser passado como referencia para a função:
+
+funcaoTal(++numero) -> desse jeito, iremos incrementar o valor do número, e a função vai ter a váriavel número com seu valor incrementado.
+
+
+negar váriavel booleana
+
+boolean variavelFoda = true;
+
+System.out.println(!variavelFoda); -> será printado no sistema false, mas o valor não será alterado em memória, apenas em tempo de execução para a função. Caso queiramos alterar para memória, iremos ter que usar o operador de atribuição
+
+variavelFoda = !variavelFoda;
+
+Dessa forma, conseguimos utilizar esse operador para termos o valor contrário do valor declarado.
+
+
+Operador Ternário
+
+Operador de condição ternária é uma forma resumida para definir uma condição, e escolher por um dentre dois valores. Você deve pensar numa condição ternária como se fosse uma condição IF normal, porém, de um forma em que toda a sua estrura escrita numa única linha
+
+O operator ternário pelos símbolos: ?: utilizados na seguinte estrutura de sintaxe:
+
+<expressão condicional> ? caso condição seja true> : <Caso consição seja false>
+
+a==b ? "Verdadeiro" : "falso";
+
+
+usuario.getNome().equals("joão") ? "Joao" : "não é joao";
+
+
+
+--------------------------
+
+Métodos
+
+métodos são funções de classes. Devem ter nomes como verbos, e devem seguir o padrão de uma única responsabilidade.
+
+------------------------
+
+Scanner
+
+nos exemplos anteriores, percebos que podemos receber dados digitados pelo usuário do nosso sistema, porém tudo precisa estar em uma linha e também é necessário informar os valores nas posições correpsondentes. Esta abordadem pode deixar margens de execução com erro do nosso programa. Para isso, com a finalidade de deixas a nossas entradas de dados mais seguras, agora vamos receber esses dados via Scanner.
+
+A classe Scanner permite que o usuário tenha um interação mais assertiva com o nosso programa, veja como vamos mudar nosso Programa ao uso do objeto Scanner
+
+
+public class AboutMe {
+    public static void main(String[] args) {
+        Scanenr scanner = new Scanner(System.in);
+        
+        System.out.println("Digite seu nome: ");
+        String nome = scanner.nextLine();
+        
+        System.out.println("Seu nome é: " + nome");
+}
