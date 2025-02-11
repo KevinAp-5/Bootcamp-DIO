@@ -106,3 +106,49 @@ public class AboutMe {
         
         System.out.println("Seu nome é: " + nome");
 }
+
+
+---------------------
+
+Estrutura condicional possibilita um fluxo dentro do código, a partir de verificações de condições.
+
+Condição ternária
+
+int nota = 7;
+
+String resultado = nota >=7 ? "Aprovado" : "Reprovado";
+
+outro resultado agora mais composto
+
+String resultado = nota >= 7 ? "Aprovado":  nota >= 5 && nota < 7 ? "Prova recuperação" : "reprovado"
+
+Dessa forma temos o mesmo fluxo de condição que um if composto, mas agora em menos linhas e deixando o código mais limpo.
+
+--------------------------------
+
+Hierarquia de exxceções
+
+A Linguagem java dispões de uma variadade de classes que representam exceções, e estas classes são organizadas em uma hierarquia denominadas Checked and Unchecked Exceptions ou Exceções checadas e não checadas
+
+trowable
+    Error - Um erro brusco, onde a aplicação de fato não consegue sobreviver
+    Exception - Caminho inesperado, um fluxo inesperado.
+        RuntimeException
+            NullPointerException
+            NumberFormatException
+            ClassCastException
+            IndexoutOfBoundException
+        
+RuntimeException é uma subclasse de Exception
+
+Exception por sí so tem suas Exceptions
+    IOException
+    SQLException
+    MalformedURLException
+
+
+
+O que determina uma exceção ser classificada como checada ou não checada?
+É o risco dela ser disparada logo você precisa tratá-la
+
+
