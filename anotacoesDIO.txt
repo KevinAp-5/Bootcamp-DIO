@@ -152,3 +152,261 @@ O que determina uma exceção ser classificada como checada ou não checada?
 É o risco dela ser disparada logo você precisa tratá-la
 
 
+Pilha de execução de um programa Java/Stack Trace
+
+Pilha de execução:
+Toda invocação de método é empilhada em uma estrutura de dados que isola a área de memória de cada um. Quando um método termina(retorna), ele volta para o método que o invocou
+
+Stack Trace:
+É a matriz onde encontramos a pilha de execução da exceção. Em outras palavras, podemos dizer que o rastreamento da pilha busca(rastreio) para a próxima linha onde a exeção pode surgir.
+
+Então as chamadas dos métodos ficam empilhadas.
+
+------------------------
+Conceito de OO
+
+Precisamos entender que as linguagens cada vez mais vem se adequando ao cenário real, propocionando assim que o programar desenvolva algoritmos mais próximo do fluxo comportámental, logo tudo ao seu redor é representado como objetos.
+
+Enquanto a programação estrutura é voltada a procedimento e funções definidas pelo usuário, a programação orientada a objetos é voltada a conceitos como o de classes e objetos
+
+
+Classes
+
+Toda a estrutura de código na linguagem java é distribuido em arquivos com extensão .java denominados de classe.
+
+As classes existentes em nosso projeto serão compostas por:
+
+Identificados, Características e Comportamentos.
+
+Classe(class): a estrutura e ou representação que direciona a criação dos objetos de mesmo tipo.
+
+Identificador(Identity): Propósito existencial aos objetos que serão criados
+
+Características(states): Também conhecidos como atributos ou propriedades, é toda informação que representa o estado do objeto
+
+Comportamentos(Behavior): Também é conhecido como ações ou métodos, é toda parte comportamental que um objeto dispõe
+
+Instanciar(new): É o ato de criar um objeto a partir de estrutura definida em uma classe.
+
+----------------------------
+
+Seguindo algumas convenções, as nossas classes são classificadas como:
+
+Classe de modelo(model): classes que representem estrutura de domínio de aplicação, exemplo: Cliente, Pedido, Nota Fiscal etc.
+
+Classe de serviço (service): classes que contém regras de negócio e validação de nosso sistema.
+
+Classe de repositório (repository): classes que contém uma integração com banco de dados.
+
+Classe de controle(Controller): classes que possuem a finalidade de disponibilar alguma comunicação externa a nossa aplicação, tipo http web ou webservices.
+
+Classe utilitária(util): classe que contém recrusos comuns a toda nossa aplicação.
+
+--------------------------------
+
+Pacotes
+
+A linguagem java é composta por milhares de classes com as finalidades de por exemplo: Classes de tipos de dados, representação de texto, números, datadas, arquivos, e diretórios, conexão a banco de dados, entre outras. Imagina toda essas classes existirem em um único nível de documentos? E as classes desenvolvidas por nós, meros desenvolvedores de aplicações de vários os generios? imagina como ficaria esse diretório?
+
+para previnir de ter um projeto desorganizado com todas as classes em apenas um diretório, a linguagem dispoe de um recruso que organiza as classes padrão e criada por nós, que conhecemos como pacote(package). Os pacotes são subdiretórios a partir da pasta src do nosso projeto, onde estão localizadas as classes da linguagem e novas que forem criadas par ao projeto. Existem algumas convenções para criação de pacotes ja utilizados no mercado.
+
+Os pacotes são subdiretórios a partir da classe SRC do nosso projeto
+
+Quando criamos um novo projeto em java, a pasta padrão é a pasta SRC, que por padrão qualquer classe que estiver lá, não vai precisar ter declarado que o pacote é package src; pois como é o diretório "raiz" do nosso código fonte, o java só vai colocar os packages do src em diante.
+
+Então caso criarmos um package novo a partir de src.
+src
+    --- model
+    
+Ai a nossa classe vai ter apenas: package model;
+
+-------------------------------------------
+
+Modificadores de acesso
+
+Modoficador public
+
+Como o proprio nome representa, quando nossa classe, método e atributo é definido como public ,qualquer outra classe em qualquer outro pacote pode visualizar tais recursos.
+
+---------------------------------
+
+Método default, apenas o pacote da classe que foi declarado vai ter acesso
+
+
+
+---------------------------
+
+Enums
+
+Emuns é um tipo especial de classe onde os objetos são previamente criados, imutáveis e disponíveis para toda aplicação
+
+usamos enum, quando o nosso modelo de negócio contém objetos de memso contexto, que já existem de pré-estabelecidade, com a certeza de não haver alteração de valores.
+
+Exemplos:
+
+Grau de escolaridade: Analfabeto, fundamento, médio, Superior
+
+Estado Civil, Solteiro, Casado, Divorciado, Viúvo
+
+Estados brasileiro: SP, RJ, PI, MA
+
+Não confunda uma lista de constantes com enum.
+
+Enquanto que uma constante é uma variável de tipo com valor imutável, um enum, é um conjunto de objetos já pre-definidos na aplicação.
+
+Como um enum é um conjunto de objetos, logo, esses objetos podem conter atributos e métodos.
+
+
+
+public enum EstadoBrasileiro {
+    SAO_PAULO("SP", "São Paulo"),
+    RIO_JANEIRO("RJ", "Rio de Janeiro"),
+    PIAUI("PI", "Piauí"),
+    MARANHA("MA", "Maranhão");
+    
+    private  String nome;
+    private String sigla;
+    
+    private EstadoBrasileiro(String sigla, String nome) {
+        this.sigla = sigla;
+        this.nome = nome;
+    }
+    
+    public String getSigla() {
+        return sigla;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+    
+    public String getNomeMaiusculo() {
+        return nome.toUpperCase();
+    }
+}
+
+Os construtores dos enums são privados, assim o java vai a grosso modo fazer vários "news" objetos do nosso enum e deixar armazenado na memória para que possamos usar. Basicamente o construtor que agente tem dentro do enum é aquele que a gente declara os seus Atributos
+Exemplo abaixo:
+
+public enum EstadoBrasileiro {
+    SAO_PAULO("SP", "São Paulo"), // basicamente já estamos chamando o construtor privado do enum aqui, e já declaramos os seus valores.
+    RIO_JANEIRO("RJ", "Rio de Janeiro"),
+    PIAUI("PI", "Piauí"),
+    MARANHA("MA", "Maranhão");
+    
+    
+
+--------------------------
+UML
+
+Linguagem dem odelagem Unificada ou UML é uma notação que possibilita a representação gráfica do projeto.
+
+Na UML, temos tres conceitos necessários para compreendermos inicialmente:
+
+Diagramas, elementos, relacionamento.
+
+-------------------
+
+As notações UML são distribuidás em duas categorias de diagramas, a estrutura e comportamental conforme listagem abaixo:
+
+Diagramas Estruturais
+
+    Digrama de classe: O Diagrama de classes é utilizado para fazer a representação de estruturas de classes de negócio, interfaces e outros componentes do sistema. Por esta característica, este diagrama é considerado o mais importante para a UML, pois auxilia a maioria dos demais diagramas.
+    
+    Diagrama de objetos: Este diagrama representa os objetos existente em um determinado isntante ou fato na aplicação. Assim, conseguimos ter uma perspectiva do estado de nossos objetos mediante a interação dos nossos usuários no sistema.
+    
+
+------------------------
+
+Diagrama de classes
+
+O diagrama de classes ilustra graficamente como classes serão estruturas e interligadas entre si diante da proposta do nosso software.
+
+Em diagrama, a estrutura das classes é constituída por:
+
+Identificação: Nome e/ou finalidade da classe
+
+Atributos: Propriedades e/ou caracteristicas
+
+Operações: Ações e/ou métodos
+
+----
+Relacionamentos
+
+Em um diagrama, as classes podem existir de forma independente, mas obviamente, haverá em alguma etapa da aplicação, a necessidade de algumas se relacionarem, O que devemos compreender, é o nivel de dependencia entre ela:
+
+
+Assosiação --
+
+Uma assosiação, define um relacionamento entre duas classes, permitindo que um objeto tenha acesso a estrutura de um outro objeto.
+
+ClasseA -----> ClasseB = Assosiação simples, navegação de A para B
+
+ClasseA <-----> ClasseB = Assosiação Bidirecional
+
+ClasseA <>----> ClasseB = Agregação
+ClasseA <<>---> CLasseB = Composição
+
+Agregação: Em uma agregação, a classe principal contem uma relação com outra classe, mas ela pode existir sem a classe agregadora. Imagina em um cadastro de Candidatos, podemos encontrar candidatos que ainda não possuam uma Profissão
+
+
+Composição: A composição; já caracteriza uma dependencia existencial entre a classe principal e a classe associada. Imaginamos que uma Admissão só poderá existir contendo duas informações básicas e a composição do Candidato selecionado.
+
+Admissão <<>-----Candidato = A aclasse admissao depende do Candidato, pois a classe Candidato compoe a admissão.
+
+--------
+
+Multiplicidade
+
+Nem sempre um relacionamento entre as classes será de um para um, um determinado cenário poderá exigir multiplicidades específicar, conforme opções abaixo:
+
+1. -> Representa uma associação CONTENDO UM ELEMENTO.
+*. -> Representa uma associação CONTENDO UMA LISTA DE ELEMENTOS.
+0..1 -> Representa uma associação CONTENDO ZERO OU UM ELEMENTO.
+0..* -> Representa uma associação contendo zero ou uma lista de elementos.
+1..* -> Representa uma associação contendo um ou uma lista de elementos.
+
+---------
+Visibilidade
+
+Os atributos e métodos de uma classe podem receber níveis de visibilidade, e na UML, eistem símbolos que representam cada um deles.
+
+(+) Visibilidade pública
+(#) Visibilidade protegida (Muita associada com herança)
+(-) Vissibilidade privada.
+
+Representação.
+-----------------------------------------
+            Identificacao               |
+-----------------------------------------
+- AtributoPrivado: int                  |
+# atributoProtegido: String             |
++ AtributoPublico: double               |        ---------------
+---------------------------             | ----> |ClasseGenerica|
++ metodoSemRetorno(): void              |   1..* ---------------
++ metodoComRetorno(): String            |
++ metodoComParametro(param1: int): void | 
+-----------------------------------------
+
+
+
+--------------------------------------------
+
+Pilares de POO
+
+
+Quatro pilares da Orientação a Objetos
+
+Encapsulamento: Nem tudo precisa estar visível, grande parte do nosso algoritmo pode ser distribuido em métodos, com finalidades específicas que ocmplementa uma ação em nossa aplicação.
+Exemplo: Liga um veículo exige muitas etapas para a engenharia, mas o condutor so bisualiza a ignição, dar a partida e a "magia" acontece.
+
+Herança: Características e comportamentos comuns podem ser elevados e compartilhados através de uma hierarquia de objetos.
+Exemplo: um Carro e uma Motocicleta possuel Propriedades como chassi, ano de fabricação e métodos como acelerar, frear. Logo para não ser um processo de codificação redundante, podemos desfrutar da herança criando uma classe Veículo para que seja herdada por Carro e Motocicleta.
+
+Abstração: É a indisponibilidade para determinar a lógica de um ou vários comportamentos em um objeto.
+Exemplo: Veículo determina duas ações como acelerar e frear, logo, estes comportamenos deverão ser abstratos pois existem mais de uma maneira de se realizar a mesma operação.
+
+Polimorfismo: São as inúmeras maneiras de se realizar uma mesma ação.
+Exemplo: Veiculo determina duas ações como acelerar e frear, primeiramente precisamos identificar se estaremos nos referindo a Carro ou Motocicleta, Para determinar a lógica de aceleração e frenagem dos respectivos veículos.
+
+
