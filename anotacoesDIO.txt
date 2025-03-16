@@ -428,9 +428,14 @@ a keyword default pode ser adicionada aos métodos da interface. O default foi i
 
 Isso também, nada impede de fazermos um override do método default da interface, para que nossa classe implemente-o da maneira que quiser.
 
+@FUncionalInterface -> essa anotação consegue ser inserida naquelas interfaces que queremos declarar como interfaces funcionais, essa anotação é mais para facilitar leitura
 
+A interface funcional precisa ter um método normal(sem ser default), e ter quantos métodos default quiser.
 
+----------------------------------
+Quando temos uma váriavel de uma classe que é statico, esse valor vai ser compartilhado entre as instancias, então mesmo que eu crie várias intancias da mesma classe, o valor do static que eu definir vai ser a mesma referencia para todas.
 
+Então é como se a nossa variável static é um atributo da classe em sí como entidade, e não das instancias.
 
 
 

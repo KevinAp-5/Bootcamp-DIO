@@ -1,15 +1,12 @@
-package entities;
+package keyword;
 
-public class User {
+// classe default(modificador de acceso)
+class Client {
 
     private String name;
     private int age;
 
-    @Override
-    public String toString() {
-        return "User [name=" + name + ", age=" + age + "]";
-    }
-    public User(String name, int age) {
+    public Client(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -25,5 +22,4 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
-
 }
