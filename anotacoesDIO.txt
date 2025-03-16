@@ -409,4 +409,29 @@ Exemplo: Veículo determina duas ações como acelerar e frear, logo, estes comp
 Polimorfismo: São as inúmeras maneiras de se realizar uma mesma ação.
 Exemplo: Veiculo determina duas ações como acelerar e frear, primeiramente precisamos identificar se estaremos nos referindo a Carro ou Motocicleta, Para determinar a lógica de aceleração e frenagem dos respectivos veículos.
 
+----------------------------------------
+
+quando estamos usando a herança e temos uma classe pai que para ser usada precisa de um construtor, precisamos que as classes filhas também tenha o construtor da nossa classe pai declarada, para que possamos usar os atributos da classe pai
+
+---------------------------------------
+
+Record conseguem trabalhar implementando interfaces, onde a record vai precisar obrigatóriamente implementar os métodos da interface.
+
+As records, em contra-partida, não conseguem trabalhar com classes abstradas, pois as records só trabalham com atributos final, enquanto as classes abstratas não necessariamente tem todos seus atributos final, Devido a isso, as records permite apenas implementar as interfaces, pois as interfaces tem essa diferença da classe 
+
+-----------------------------------------
+
+Interfaces funcionais
+
+
+a keyword default pode ser adicionada aos métodos da interface. O default foi implementado no java 8, para que você consiga gerar um método concreto dentro de uma interface, e fazer com que as implementações da interface não quebre, pois sempre que colocamos um método abstrato na intereface, as classes que estão implementando, são obrigadas a implementarem o método. Lembre-se, que as interfaces são como contratos que as classes devem seguir. Então o método default é uma forma de adicionar um método sem quebrar implementações, e também criar um método concreto dentro da interface.
+
+Isso também, nada impede de fazermos um override do método default da interface, para que nossa classe implemente-o da maneira que quiser.
+
+
+
+
+
+
+
 
