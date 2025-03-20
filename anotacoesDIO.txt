@@ -590,5 +590,28 @@ LinkedList: O linkedList é uma implementação da interface List que amareza os
 
 Vector: O vector é uma implementar antiga da interface list que é semelhante ao Arraylist, mas é sincronizada, ou seja, é thread-safe. isso signfica que várias threads podem manipular um objetor vector ao mesmo tempo sem causar problemas de concorrencia. No entanto, essa sincronização adiciona uma sobrecarga de desempenho, torncando o vector meno eficiente do que o arrayList em cenários em que a concorrencia não é um problema. Por esse motivo, o uso do vector é menos comum em aplicações modernas.
 
-           
-                                           
+------------------------------------------------
+
+Set
+
+A interface set é uma coleção que não pode conter elementos duplicados.
+
+Essa interface representa o conceito matemático de um conjunto e é usada para repreesentar conjuntos, como um baralho de cartas.
+
+A 3 implementações mais famosas de Set: hashSet, Treeset e linkedhashSet
+
+A interface set não permite acesso aleatório a um elemento na coleção.
+
+Para percorrer os elementos de um set, você pode usar um iteerador ou um loop foreach
+
+------------------------------------
+
+Diferença das implementações de Set
+
+HashSet: O hashset é uma implementação da interface set que armazea os elementos em uma tabela hash. Ele não mantém uma ordem específica dos elementos. A principal vantagem do hashset é que ele oferece um desempenho de busca muito eficiente, pois usa funções hash para indexar os elementos. No entanto, a ordem em que os elementos são adicionados pode não ser preservada ao percorrer do conjunto.
+
+TreeSet: O treeSet é uma implementação da itnerface set que armazena os elementos em uma aŕvore binária balanceada. Isso significa que os elementos são armazenado em uma ordem classificada e são mantido automaticamente em ordem crescente. A principal vantagem do Treeset é que os elementos são sempre retornados na ordem classifica, o que facilita a obtenção de elementos em uma determinada ordem. No entanto, a buca e inserção são um pouco mais lentas em comparação ao hashSet, pois ao inserir e remover, a arvore tem que se balancear novamente caso necessário.
+
+LinkedHashSet: O linkedHashSet é uma implementação da interface Set que mantém a ordem de inserção do elementos, além de usar uma tabela hash para obter um bom desempenho de busca, Ele é semelhante ao HashSet, mas também mantém uma lista duplamente vinculada que preserva a ordem de inserção. isso permite que os elementos sejam percorrido na ordem em que foram adicionados. O linkedHashSet é útil quando você quer manter a ordem da inserção dos elementos mas também ter um bom desempenho de busca.
+
+------------------------------------
