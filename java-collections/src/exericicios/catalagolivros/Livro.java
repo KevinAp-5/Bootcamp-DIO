@@ -5,6 +5,11 @@ public class Livro {
     private String writer;
     private int year;
 
+    @Override
+    public String toString() {
+        return "Livro [title=" + title + ", writer=" + writer + ", year=" + year + "]";
+    }
+
     public Livro(String title, String writer, int year) {
         this.title = title;
         this.writer = writer;

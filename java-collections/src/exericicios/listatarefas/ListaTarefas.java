@@ -22,9 +22,7 @@ public class ListaTarefas {
         return this.tarefas.size();
     }
 
-    public List<String> obterDescricoesTarefas() {
-        return tarefas.stream()
-            .map(Tarefa::getDescricao)
-            .toList();
+    public void obterDescricoesTarefas() {
+        System.out.println(tarefas);
     }
 }

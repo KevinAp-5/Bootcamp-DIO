@@ -16,10 +16,9 @@ public class CatalogoLivros {
         books.add(new Livro(title, writer, year));
     }
 
-    public List<String> findByWriter(String writer) {
+    public List<Livro> findByWriter(String writer) {
         return books.stream()
-                .filter(x -> x.getWriter().equals(writer))
-                .map(Livro::getWriter)
+                .filter(x -> x.getWriter().equalsIgnoreCase(writer))
                 .toList();
     }
 
@@ -31,7 +30,7 @@ public class CatalogoLivros {
 
     public Optional<Livro> findByTitle(String title) {
         return books.stream()
-            .filter(x -> x.getTitle().equals(title))
+            .filter(x -> x.getTitle().equalsIgnoreCase(title))
             .findFirst();
     }
 }
