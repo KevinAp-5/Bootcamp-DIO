@@ -584,7 +584,7 @@ A classe collections fornece algoritmos úteis para manipula~ao de list. Como or
 Uma collection que implementar a interface List é a Vector, que é mais utilizada para programação concorrente, que é thread-safe.
 
 
-ArrayList: O arrayList é uma implementação da interface List que armazena os elementos em uma estrutura de array redimensionável. Isso significa que ela pode crescer automaticamente a medida que novos elementos são adicionados. A principal vantagem do arraylist é o acesso rápido aods elementos por meio de indices, o que peprmite recuperar um elementos específico de forma eficiente. No entando, adicionar ou remover elementos no meio da lista pode ser mais lento, pois requer a realocação de elementos.
+ArrayList: O arrayList é uma implementação da interface List que armazena os elementos em uma estrutura de array redimensionável. Isso significa que ela pode crescer automaticamente a medida que novos elementos são adicionados. A principal vantagem do arraylist é o acesso rápido aos elementos por meio de indices, o que peprmite recuperar um elementos específico de forma eficiente. No entando, adicionar ou remover elementos no meio da lista pode ser mais lento, pois requer a realocação de elementos.
 
 LinkedList: O linkedList é uma implementação da interface List que amareza os elementos em uma lista duplamente vinculada. Cada elementos contem referencias para o elemento anterior e proximo na lista. A principal vantagem do linked list é a eficiencia na adição ou remoção de elementos no inicio ou no final da lista, pois não é necessário realozar elementos. No entando, o acesso aos elementos por meio de indices é mais lento, pois requer percorrer a lista até o elemento desejado.
 
