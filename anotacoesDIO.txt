@@ -437,6 +437,158 @@ Quando temos uma váriavel de uma classe que é statico, esse valor vai ser comp
 
 Então é como se a nossa variável static é um atributo da classe em sí como entidade, e não das instancias.
 
+--------------------------------------------------
+
+Collection framwork API
+
+Uma coleção(collection) é uma estrutura de dados que serve para agrupar muitos elementos em uma única udade, estes elementos precisão ser Objetos.
+
+Uma collection pode ter coleções homogêneas e heterogêneas, normalmente utilizamos coleões hoogêneas de um tipo específico.
+
+O núcleo principal das coleções é formado pelas interfaces da figura a baixo, essas interfaces permitem manipular a coleção independente do nível de detalhe que elas representam.
+
+Temos quatro grandes tipos de coleçõe: List(lista), Set(conjunto), queue (fila) e map(mapa) a partir dessas interfaces, temos muitas subclasses concretas que implemental várias formas diferentes de se trabahar com cada coleção
+
+As interfaces e classes são encontradas dentro do package java.util.
+
+----------------
+
+Generics Type
+
+Um tipo genérico é uma classe genérica, ou uma interface que é parametrizada em relações a tipos.
+
+A classe Box a seguir será modificada para demonstrar o conceito.
+
+public class Box {
+    private Object object
+    public void set(Object object) {this.object = object};
+    
+    public Objecct get() {return object;}
+}
+
+o Simbolo<> é chamado de "diamon" ou "diamond operator" foi um recurso introduzido no java 7 e é usado no contexto de tipos genéricos em Java, para inferir automaticamente o tipo com base no contexto.
 
 
+Para utilizar a classe Box com o generics, iremos colocar a declaração do tipo genérico alterando o código public class Box<T>
 
+Isso introduz a variável do tipo T que pode ser usadas em qualquer lugar dentro da classe.
+
+Dessa foram iremos tirar o Object, e iremos colocar o T
+
+Uma váriavel de tipo pode ser qualquer tipo não primitivo que voce^especificar: qualquer tipo de classe, qualquer tipo de interface, qualquer tipo de arrays ou até mesmo outras váriavel de tipo.
+
+Essa mesma técnica pode ser aplciada para criar interfaces genéricas.
+
+Os nomes de paramentros mais comumentes usados são:
+
+E - elemento (usado extensivamente pelo Java collectiosn framework)
+K - chave
+N - número
+T - tipo
+V - valor
+S, U, C, etc..
+
+
+----------------------------------------
+
+Vantagens simples de usar generics nas interfaces collection em java
+
+1 - Segurança de tipos de dados: O uso de generics garante que apenas objetos de um tipo específico possam ser adicionados a coleção, evitando erros de tipo e garantindo que você esteja lidando com os dados corretos.
+
+2 - Código mais legível: Ao usar generics, você pode especificar o tipo de dados esperado ou retornado pela coleção, o que torna o código mais fácil de entender e ler.
+ 
+3 - Detecta erros mais cedo: O compilador verificar se você está usando os tipos corretos durante a compiação, ajudando a identificar erros de tipo antes mesmo de executar o programa.
+
+4 - Reutilização de código: Com generics, você pode criar classes e métodos genéricos que funcionam com diferentes tipos de coleções, evitando a necessidade de duplicar código para cada tipo especifico.
+
+5 - Melhor desempenho: o uso de generics pode melhorar o desempenho, pois evita a necessidade de tipo desnecessários e permite que o compilador otimize o código com base no tipo especificado
+
+
+------------------------
+
+
+Comparable x Comparator - Entendendo essas duas interfaces
+
+Comparable
+
+- Comparable fornece uma única sequencia de ordenação. Em outras palavras, podemos ordenar a coçeão com base em um único elemento, como id, nome e preço
+
+- Comparable afeta a classe original, ou seja, a classe atual é modificada.
+
+- Comparable fornece o método compareTo() para ordenar elementos.
+
+- Comparable está presente no pacote java.lang
+
+- Podemos ordenar elementos da lista do tipo COmparable usando o método Collections.sort(List).
+
+Por exemplo, temos uma classe de livro, onde vai ter nome do autor, nome do livro, e ano que foi lançado. Ao implementarmos a Interface comparable a ela, podemos ter uma lista do objeto livro, e podemor ordenar ela através de seus atributos.
+
+Dessa forma, caso queiramos ordenar os livros através do ano de lançamento, nós podemos graças ao comparable, ou ordenar por nome, nós podemos.
+
+
+------------------------
+
+Comparator
+
+- Comparator fornece o método compare() para ordenar elementos
+- Comparator fornece múltiplas sequencias de ordenação. Em outras palabras, podemos ordenar a coleçao com base em múltiplos elementos, como id, nome, preço, etc.
+- O comparator não afeta a classe principal, ou seja, a classe principal não é modificada
+- Um comparator está presente no pacote java.util
+- Podemos ordenar elementos da lista do tipo COmparator usando o método Collections.sort(List, Comparator), então podemos passar uma classe que vai implementar o método compare() da interface Comparator para o método Collections.sort(), onde essa classe vai implementar como se deve comparar os elementos!.
+
+--------------------------------
+
+// Classe para comparar Livro por ano
+
+class CompararAno implements Comparator<Livro> {
+    public int compare(livro livro1, Livro livro2) {
+        if (livro1.getAno() < livro2.getAno())
+            return -1;
+        if (livro1.getAno() > livro2.getAno())
+            return 1;
+        else
+            return 0;
+    }
+}
+
+
+------------------------------------
+
+Collections
+
+A classe collections é uma classe utilitária do java para operações comuns em coleções
+Ela fornece métodos para ordenação, busca, manipulação e sincronização de coleções.
+O método sort é usado para ordenar uma lista em ordem ascendente.
+O metodo sort em conjunto com Collections.reverseOrder() permite ornar em ordem descendente.
+
+
+Então o comparator pode ser criado em uma classe que queremos que implemente o método compare, e podemos passar essa classe como parametro para servir de comparações no Collections.sort
+
+Já o comparable, implementamos na nossa classe original, e agora teremos que implementar o método compareTo(Objecto instancia)
+                                           titulo.compareTo(instan.titulo);
+                                
+                                
+-------------------------------
+LIST
+
+A interface list é uma coleção ordenada que permitee a inclusão de elementos duplicados.
+
+É um dos tipos de coleões mais utilziados em java, e as classes de implementação comum são Arraylist e LinkedList.
+
+A list se assemelha a uma matriz com comprimento dinamico, permitindo adicionar ou remover elementos.
+
+A interface list fornece métodos úteis para adicionar elementos em posições específicar, remvoer ou substituir elementos com base no indice e obter sublistas usando indices.
+
+A classe collections fornece algoritmos úteis para manipula~ao de list. Como ordenação (sort) eembaralhamento(suffle), reversão(reverse) e busca binária (binarySearch).
+
+Uma collection que implementar a interface List é a Vector, que é mais utilizada para programação concorrente, que é thread-safe.
+
+
+ArrayList: O arrayList é uma implementação da interface List que armazena os elementos em uma estrutura de array redimensionável. Isso significa que ela pode crescer automaticamente a medida que novos elementos são adicionados. A principal vantagem do arraylist é o acesso rápido aods elementos por meio de indices, o que peprmite recuperar um elementos específico de forma eficiente. No entando, adicionar ou remover elementos no meio da lista pode ser mais lento, pois requer a realocação de elementos.
+
+LinkedList: O linkedList é uma implementação da interface List que amareza os elementos em uma lista duplamente vinculada. Cada elementos contem referencias para o elemento anterior e proximo na lista. A principal vantagem do linked list é a eficiencia na adição ou remoção de elementos no inicio ou no final da lista, pois não é necessário realozar elementos. No entando, o acesso aos elementos por meio de indices é mais lento, pois requer percorrer a lista até o elemento desejado.
+
+Vector: O vector é uma implementar antiga da interface list que é semelhante ao Arraylist, mas é sincronizada, ou seja, é thread-safe. isso signfica que várias threads podem manipular um objetor vector ao mesmo tempo sem causar problemas de concorrencia. No entanto, essa sincronização adiciona uma sobrecarga de desempenho, torncando o vector meno eficiente do que o arrayList em cenários em que a concorrencia não é um problema. Por esse motivo, o uso do vector é menos comum em aplicações modernas.
+
+           
+                                           
