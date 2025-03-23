@@ -20,14 +20,9 @@ public class EstoqueProdutos {
     }
 
     public double valorTotal() {
-        double valorTotal = 0;
-    
-        for (Map.Entry<Long, Produto> entry: products.entrySet()) {
-            Produto produto = entry.getValue();
-            valorTotal += produto.getValor() * produto.getQuantidade();
-        }
-    
-        return valorTotal;
+        return products.values().stream()
+                .mapToDouble(Produto::finalPrice)
+                .sum();
     }
 
     public Produto produtoMaisCaro() {
