@@ -1,5 +1,6 @@
 package mapexercicios.estoque;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,40 +31,20 @@ public class EstoqueProdutos {
     }
 
     public Produto produtoMaisCaro() {
-        double preco = 0;
-        Produto produtoMaisCaro = null;
-        for (Map.Entry<Long, Produto> entry: products.entrySet()) {
-            if (entry.getValue().getValor() > preco) {
-                preco = entry.getValue().getValor();
-                produtoMaisCaro = entry.getValue();
-            }
-        }
-        return produtoMaisCaro;
+        return products.values().stream()
+                .max(Comparator.comparingDouble(Produto::getValor))
+                .orElse(null);
     }
 
     public Produto produtoMaisBarato() {
-        double preco = Double.MAX_VALUE;
-        Produto productToReturn = null;
-        for (Map.Entry<Long, Produto> entry: products.entrySet()) {
-            if (entry.getValue().getValor() < preco) {
-                preco = entry.getValue().getValor();
-                productToReturn = entry.getValue();
-            }
-        }
-        return productToReturn;
+        return products.values().stream()
+                .min(Comparator.comparingDouble(Produto::getValor))
+                .orElse(null);
     }
 
     public Produto produtoMaiorQuantidadeValor() {
-        double precoTotal = 0;
-        Produto produto = null;
-        for (Map.Entry<Long, Produto> entry: products.entrySet()) {
-            var produtoEntry = entry.getValue();
-            var maxPreco = produtoEntry.getValor() * produtoEntry.getQuantidade();
-            if (maxPreco > precoTotal) {
-                precoTotal = maxPreco;
-                produto = produtoEntry;
-            }
-        }
-        return produto;
+        return products.values().stream()
+                .max(Comparator.comparingDouble(Produto::finalPrice))
+                .orElse(null);
     }
 }

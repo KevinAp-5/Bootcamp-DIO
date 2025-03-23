@@ -16,6 +16,10 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
+    public double finalPrice() {
+        return quantidade * valor;
+    }
+
     public String getName() {
         return name;
     }

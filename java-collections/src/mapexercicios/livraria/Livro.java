@@ -15,7 +15,7 @@ public class Livro  implements Comparable<Livro>{
         this.author = author;
         this.price = price;
     }
-    
+
     @Override
     public int compareTo(Livro arg0) {
         return Double.compare(price, arg0.getPrice());
