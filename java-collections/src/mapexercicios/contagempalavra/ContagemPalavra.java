@@ -24,14 +24,9 @@ public class ContagemPalavra {
     }
 
     public String frequentPalavra() {
-        Integer counter = 0;
-        String palavraFrequente = null;
-        for (Map.Entry<String, Integer> entry: palavras.entrySet()) {
-            if (entry.getValue() > counter) {
-                counter = entry.getValue();
-                palavraFrequente = entry.getKey();
-            }
-        }
-        return palavraFrequente;
+        return palavras.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey) 
+                .orElse(null);
     }
 }
