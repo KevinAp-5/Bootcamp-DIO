@@ -1,9 +1,9 @@
 package mapexercicios.eventos;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class AgendaEventos {
     private Map<LocalDate, Evento> eventos;
@@ -17,9 +17,8 @@ public class AgendaEventos {
     }
 
     public void exibirAgenda() {
-        var eventoOrdenado = eventos.keySet().stream().sorted(Comparator.reverseOrder()).toList();
-
-        eventoOrdenado.forEach(x -> System.out.println("Data: " + x + ", Evento: " + eventos.get(x)));
+        var eventoTree = new TreeMap<>(eventos);
+        System.out.println(eventoTree);
     }
 
     public void proximoEvento() {
