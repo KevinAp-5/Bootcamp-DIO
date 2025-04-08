@@ -614,4 +614,707 @@ TreeSet: O treeSet é uma implementação da itnerface set que armazena os eleme
 
 LinkedHashSet: O linkedHashSet é uma implementação da interface Set que mantém a ordem de inserção do elementos, além de usar uma tabela hash para obter um bom desempenho de busca, Ele é semelhante ao HashSet, mas também mantém uma lista duplamente vinculada que preserva a ordem de inserção. isso permite que os elementos sejam percorrido na ordem em que foram adicionados. O linkedHashSet é útil quando você quer manter a ordem da inserção dos elementos mas também ter um bom desempenho de busca.
 
+
+------------------------------------------
+
+Stream API
+
+A streams APi é uma nova opão para manipuação de coleçoes em java seguindo os principios da programação funcional
+
+Stream, Trata-se de uma poderosa solução para processar coleções de maneira mais declarativa, ao invés da tradicional forma imperativa
+
+na forma imperativa para realizar uma soma simples, por exemplo: O desenvolvedor tem que se preocuár em não apenas com o que deve ser feitp em cada em elemento, isso é, com as regras associadas ao processametno dos emenetos da lista, mas também com a maneira de realizar essa iteração.
+
+----------
+
+Interfaces funcionais (interface que contem apenas um método abstrato)
+
+-------
+Lambda
+
+As expressões lambda permitem reŕesentar interfaces funcionais (interfaces com um único método abstrato) de forma mais consisa e possibitam escrever código no estilo funcinal.
+
+As interfaces funcionais desemprenham um papel crucial na programação funcional em Java, pois servem de base para o uso de expressões lambda.
+
+Uma função lambda é uma função sem declaração, isso é, não é necessário colocar um nome, um tipo de retorno e o modificador de acesso. A ideia é que o método seja declarado no mesmo lugar em que será usado.
+
+As funções lambda em Java tem a sintaxe definida como (argumento) -> (corpo)
+
+
+--------------------------
+Method reference
+
+Method reference é um novo recurso do java 8 que permite fazer referência a um método ou construtor de uma classe (de forma funcional) e assim indicar que ele deve ser utilizado num ponto específico do código, deixando-a mais simples e legível.
+
+Para utilizá-lo, basta informar uma classe ou referencia seguida do simbolo :: e o nome do método sem os parenteses no final
+
+
+---------------------------------------
+Functional interface
+
+Qual interface com um SAM (Single Abstract method) é uma interface funcional e sua implementação pode ser tratada como expressões lambda.
+
+--------------------------------
+CONSUMER INTERFACE
+
+Consumer<T>: Representa uma operação que aceita um argumento do tipo T e não retorna nenhum resultado. È utilizada principalmente para realizar ações ou efeitos colaterais nos elementos do Stream sem modificar ou retornar um valor.
+
+Por exemplo: usar uma consumer para printar cada valor da stream.
+
+-------------------
+
+Supplyer INTERFACE
+
+A supplier interface representa uma operação que não aceita nenhum argumento e retorna um resultado do tipo T.
+
+É comumente usada para criar ou fornecer novos objetos de um determinado tipo.
+
+Supplier<String> mensagem = () -> "Olá, seja bem-vindo";
+
+O método generate recebe um supplier
+Stream.generate(mensage)
+.limit(5)
+.collect(Collectors.toList());
+
+
+----------------------------------
+
+FunctionInterface
+
+Representa uma função que aceita um argumento do tipo T e retorna um resultado do tipo R.
+
+É utilizada pra transformar ou mapear os elementos do Stream em outros valores ou tipos.
+
+Exemplo: Usar a Function com expressão lambda para dobrar todos os números
+
+Function<integer, Integer> dobrar = numero -> numero * 2;
+
+podemos usar essa function no método .map() do stream()
+
+
+---------------------------------------
+
+Predicate Interface
+
+Representa uma função que aceita um argumento do tipo T e retorna um valor booleano (verdadeiro ou falso).
+
+É comumente usado para filtrar os elementos do stream com base em alguma condiçao.
+
+Exemplo: criar um predicate para verificar se a palavra tem mais de 5 caracteres
+
+Predicate<String> filtro = palavra -> palavra.length() -> 5;
+
+Então podemos aplicar o nosso Predicate armazenado na variável filtro, no método .filter() do stream().
+
+Podemos criar predicates para filtrar a coleção a partir de uma função que vai retornar verdadeiro e falso através de uma condição.
+
+----------------------------------------
+
+BinaryOperator interface
+
+Representa uma operação que combina dois argumentos do tipo T e retorna um resultado do mesmo tipo T.
+
+É usada para realizar operaões de redução em pares de elementos, como somar números ou combinas objetos.
+
+Exemplo de uso: usar o BinaryOperator com expressão lambda para sobar dois números inteiros.
+
+BinaryOperator<Integer> somar = (num1, num2) -> num1 + num2;
+
+Pode ser utilizada no método .reduce() do stream()
+
+o método reduce vai ter dois argumentos(identity: int, BinaryOperator<T>)
+
+O primeiro método identity, ele vai ser usado para saber o ponto de partida do laço de repetição que vai ser aplicado pelo reduce.
+
+vai representar como se fosse a variável temporária que é declarada dentro do laço for: for(int x = 0....)
+
+Essa variável vai ter o mesmo princípio.
+
+O segundo parametro do método .reduce é o nosso BinaryOperator que vai ser aplicado para os elementos da coleção.
+
+-------------------------
+
+Mais métodos streams
+
+As operações Stream API pode ser classificada em duas categorias principais:
+
+Operações intermediárias: são aquelas que retornam uma nova Stream e permite encadear várias operações, formando um pipeline de processamento de dados. São elas:
+
+- Filter(Predicate<T> predicate): Filtra os elementos da Stream com base em um predicado. Retorna uma nova Stream contendo apenas os elementos que atendem ao critério do Predicado(operação que resulta em booleano). Exemplo: stream.filter(n -> n.size() < 100)
+
+- Map(Function<T, T> mapper): Transforma cada elemento da Stream usando a função específicada e retorna uma nova Stream contendo os elementos resultantes. Exemplo: stream.map(s -> s.toUpperCase()) ou stream.map(Integer::intValue)
+
+- sorted(): Classifica os elementos da Stream em ordem natural (se os elementos forem comparáveis) ou de acordo com o comparator fornecido: stream.sorted()
+
+- distinct(): Remove elementos duplicados da Stream, considerando a implementação do método equals() para comparação: Exemplo: stream.distinct()
+
+- limit(long maxSize): Limite o número edelementos da stream ao maxSize primeiros elementos: Exeplo: stream.distinct()
+
+- skip(long n): Pula os primeiros n elementos da Stream e retorna uma nova Stream sem eles: exemplo: stream.skip(10)
+
+
+Segunda categoria de operações de Stream Api
+
+Operações Terminais: São aquelas que enceerram o pipeline e produzem um resultado final:
+
+ForEach(Consumer<T> action): Executa uma ação para cada elemento da stream: exemplo: stream.forEach(System.out::println)
+
+toArray(): Converte a Stream em um array contendo os elementos da stream .toArray()
+
+collect(Collector<T, A, R> collector): Coleta os elementos da sTream em uma estrutura de dados específica, como uma lista ou um mapa: .collect(Collectors.toList())
+
+count(): retorna o número de elementos da Stream() .count()
+
+anyMatch<Predicate<T> predicate): Verifica se algum elemento da Stream atende ao preedicado especificado
+stream.anyMatch(s -> s.startsWith("A"))
+
+allMatch(Predicate<T> predicate): Verifica se todos elementos da Stream atendem ao predicado .allMatch(n -> n != null)
+
+noneMatch(Predicate<T> predicate): Verifica se nenhum elemento da stream atende ao predicado .noneMatch(s -> s.isEmpty())
+
+min(Comparator<T> comparator) e max(Comparator<T> comparator): Encontra o elemento minimo e máximo da Stream, respectivamente de acordo com o comparador fornecido.
+
+reduce(T identity, BinaryOperator<T> accumulator): COmbina os elementos da Stream usando o acumulador específicado e retorna o resultado final: exemplo: stream.reduce(o, (a, b) -> a + b)
+
+-------------------------------
+
+Optional
+
+o objeto da classe Optional no java é fornecer uma abordagem mais segura e expressiva para tratar caso em que um valor pode ser ausente (nulo). Ela foi introduzida a partir do java 8 para evitr o temido NullPointerException(NPE) que é comum quando se trabalha com referencias nulas. Optional permite encapsular um valor que pode ser nulo dentro de um objeto optional. Isso indica explicitamente que o valor pode ou não estar presente e requer um código que deseja acessá-lo faça uma verificação explicita.
+
+- of(value): criar um Optional contendo o valor fornecido. Se o valor for nulo, lançara uma exceção nullPointerException.
+
+Optional<String> optionalValue: Optional.of("hello");
+System.out.println(optinalValue.get());
+
+- ofNullable(value): Cria um optional contendo o valor fornacido, mas permite que o valor seja nulo
+
+String nullValue = null;
+Optional<String> optinalValue = Optional.ofNullable(nullValue);
+
+- empty(): Retorna um Optional Vazio (sem valor);
+
+- isPresent(): Verifica se o optional contém um valor não nulo
+
+- isEmpty(): a partir do java 11 verifica se o Optional está vazio(não contem um valor não nulo.
+
+- get(): obtem o valor contido no Optional. Se o valor for nulo, lançar[a uma exeção noSuchElement
+
+- orElse(defaultValue): Obtém um valor contido no Optinal, ou retorna um valor padrão se o optional estiver Vazio
+
+- orElseGet(supplier) obtem o valor contido no optional, ou retorna um valr fornecido por um supplier de o Optinal estiver vazio
+
+- orElseThrow(exceptionSupplier): Obtém um valor contido no Optinal, ou lança uma exceção fornecida no supplier se o Optinal estiver vazio.
+
+- ifPresent(consumer): Executa uma ação fornecida por um consumer se o optinal contiver um valor.
+
+
+
 ------------------------------------
+Explorando os pilares da orientação a objetos com java
+
+Domínio/problema
+
+COnsiderando nosso conhecimento no dominio bancário, iremos abstrair uma solução Orientada a objetos em java, para isso vamos interpretar o seguinte cenário
+
+"Um banco oferece aos seus clientes dois tipos de contas (corrente e poupança), as quais possuem as funcionalidade de depósito, saque e transferencia (entre contas da própria instituição).
+
+
+-------------
+
+Pilares da OO
+
+Abstração
+
+Habilidade de concentrar-se nos aspectos essenciais de um domínio, ignorando características menos importante ou acidentais.
+
+
+Encapsulamento
+
+Encapsular significa esconder a implementação dos objetos, criando assim interfaces de uso mais concidas e fáceis de usar/entender. O encapsulamento favorece principalmente dois aspectos de um sistema: A manutenção e evolução.
+
+
+herança
+
+Permite que você defina uma classe filha que reutiliza (herda), estende ou modifica o comportamento de uma classe pai. A classe cujos membros são herdados é chamada de classe base. A class que herda os membros da classe base é chamada de classe derivada.
+
+
+public interface IConta {
+    void sacar(double valor);
+    
+    void depositor(double valor);
+    
+    void transferir(double valor, Conta contaDestino);
+
+}
+
+
+
+
+Polimorfismo
+
+Capacidade de um objeto poder se referenciado de várias forma, ou seja, é a capacidade de tratar objetos criados a partir de classes específicas como objetos de uma classe genérica.
+
+Cuidado, o polimorfismo não quer dizer que o objeto fica se transformando, muito pelo contrário, um objeto nasce de um tipo e morre daquele tipo, o que pode mudar é a maneira como nos referismo a ele.
+
+
+
+
+
+
+
+
+
+
+---------------------------------------
+
+Oque são microserviços?
+
+Uma abordagem arquitetural onde a aplicação é dividida em pequenos serviços
+
+Cada serviço é responsável por um funcionalidade;
+
+
+------------------------
+
+Diferenças entre monolito e microserviços
+
+Monolito
+    Aplicação está unificada em um único codigo-fonte, banco de dados e deployment;
+    Eficiente para sistemas menores (é qoeu todos pensagem);
+    Manutenção pode ser complexa caso o sistema cresça;
+    
+Microserviços
+    Aplicação dividida em vários serviços pequenos e independentes;
+    Facilita o desenvolvimento, escalabilidade e o deploy;
+    Porém, essa abordagem traz desafios e complexidade operacional.
+    
+
+--------------------
+benefícios dos microserviços
+
+Esalabilidade independentes: Podemos aumentar a escalabilidade de apenas um serviço sem precisar escalar a aplicação inteira;
+
+Resiliencia: uma falha em um serviço não compromete todo o sistema;
+
+Time de desenvolvimento: pode trabalhar em serviços diferentes de forma simultanea, acelerando o desenvolvimento.
+
+--------------------------
+
+Desafios dos microserviços
+
+Comunicação entre serviços:
+    Latência e falhas inesperadas
+    
+Gerenciamento de estados e banco de dados;
+
+Segurança precisa ser reforçada;
+
+Complexidade operacional(Infraestrutura);
+
+
+----------------------------------
+
+O que é rabbitMQ
+
+message broker de código aberto baseado no protocolo AMQP;
+
+Atua como intermediário entre serviços;
+
+Permite comunicação assincrona por meio de mensageria
+
+
+
+------------------------------------------------------
+
+
+Spring framework
+
+É um framework open source desenvolvido para a plataforma java baseado nos padrões de projetos inversão de controle e injeção de dependencia.
+
+Sua estrutura é compostoa por módulos afins de reduzir a complexidade no desenvolvimento aplicações simples ou corporativa.
+
+beans são objetos gerenciados pelo Core Container
+
+----------------------------
+Spring vs java EE
+
+Olhando um pouco a história, há muito tempo através, o java EE era realmente muito complicado e nem era necessário entrar numa discussão, usar o Spring era um caminho mais simples e mais fácil de evoluir. Aí chegou a versão 5 do java EE e a discussão voltou a ficar um pouco mais quente.
+
+
+---------------------
+
+inversão de controle
+
+Inversion of Control ou Ioc, trata-se do redirecionamento do fluxo de execução de um código retirando parcialmente o controle sobre ele e delegando-o para um container.
+
+O principal propósito é minimizar o acoplamento do código.
+
+
+Então no spring, o Ioc é um princpio que trnasfere o controle da criação e gestão de objetos para um conteiner (Spring Ioc container), permitindo que as dependencias sejam injetadas, em vez de serem criadas internamente.
+
+Em detalhe:
+O que é Ioc
+    IoC é um padrão de design que inverte o controlo da criação e gestão de objetos e passando essa responsabilidade para um conteiner.
+    
+    Em vez da classe criar suas proprias dependencias, o Ioc faz com que as dependencias sejam injetadas na classe, o que resuulta em um código mais modular e testável.
+
+Como funciona no spring?
+    O spring IoC conteinar é responsável por gerenciar a criação e o ciclo de vida das classes (beans) da aplicação.
+    
+    As dependencias são injetadas nos benas através de construtores, métodos setters, ou campos, dependendo da configuração.
+    
+    
+    O Spring IoC container resolve as dependencias automaticamente, garantindo que as classes recebam as instancias necessárias para funcionar.
+    
+Benefícios da IoC:
+
+Baixo acoplamento: As classes ficam menos dependentes entre si, tornando o código mais flexível e facil de manter
+
+Facilidade de teste: as dependencias podem ser facilmente subtituidas por mocks durante os testes, permitindo testes mais eficiencintes
+
+Reutilização de código: O código se torna mais modular e pode ser reutilizado em diferentes partes da aplicação.
+
+
+Sem o IOC, a gente tem que criar o objeto, para que possamos utilizado, essa é forma tradicional do Java EE
+
+Com o IOC, a gente gente tem o container que vai ser responsável pela criação desses objetos, deixando essa questão abstrata para o programador, e facilitando no desenvolvimento de software.
+
+
+Injeção de dependencia:
+
+
+A injeção de dependencia é um padrão de desenvolvimento com a finalidade de manter baixo o nível de acoplamento entre módulos de um sistema.
+
+A Inversão de controle, que está fortemente relacionada a injeção de dependencia, o nosso código fica menos acoplado, e dependendo menos de implementações.
+
+Por exemplo: podemos ter uma interface, que vai ser usado como referencia para que possamos estar desenvolvendo nossa classe. Ou seja, iremos estar injetando uma interface, e não iremos nos preocupar com implementações.
+
+
+-------------------
+
+beans: objeto que é instanciado (criado), montado e gerenciado por um container através do princípio da inversão de controle.
+
+bean é um objeto que vai ser mantido, gerenciado, criado por pelo container do spring.
+
+Escopos:
+
+Singleton -> Um mesmo objeto, vai ser utilizado por toda a aplicação, sem ter a necessidade de diversas instancias diferentes.
+
+Prototype -> É criado uma nova instancia a cada requisição deu um objeto. Então o container vai entender, de que não vai mandar a mesma instancia de um objeto, para camadas diferentes da aplicação.
+
+Http (request, session, global)
+
+
+Singleton:
+
+O container do Spring IoC define apenas uma instancia do Objeto.
+
+ProtoType: 
+
+Será criado um novo objeto a cada solicitação ao container..
+
+
+Http - Request:
+
+Um Bean será criado para cada requisição Http
+
+Os objetos existirão enquanto a requisição estiver em execução.
+
+Http - Session
+
+Um bean será criado para a sessão do usuário.
+
+Precisamos acessar a mesma solicitação duas vezes para testar os escopos específicos da web.
+
+Http - Global
+
+Application Global Scope cria um bean para o ciuclo de vida do contexto da aplicação. Objetos compartilhados por toda a aplicação.
+
+
+
+---------------------
+
+Autowired:
+
+Uma anotação (indicação) onde deverá ocorrer uma injeção automática de dependencia.
+
+- byName: É buscado um método set que corresponde ao nome do bean.
+- byType: É considerado o tipo da classe para inclusão do bean;
+- byConstructor: usamos o construtor para incluir a dependencia.
+
+---------------------------------------------
+
+Conhecendo o Spring boot
+
+Enquanto o spring framework é baseado no padrão de injeção de dependencias, O springboot foca na configuração automática.
+
+O Spring boot é muito útil para produtividade, pois deixa a necessidade de perder tempo com configurações.
+
+--------------------
+Antes do Spring boot
+
+Desafios com configuração do projeto.
+
+- Dependencia individual
+- Verbosidade
+- Incompatibilidade de versões
+- Compelxidade de gestão
+- Configurações complexas e repetitivas.
+
+-------------------------------
+
+A grande sacada do spring boot, é os starters, onde você seleciona exatamente o que você precisa para o seu projeto, e não precisa se preocupar em configura-los
+
+Dado que a maior parte das configurações necessárias para o inicio de um projeto são sempre mas mesmas, por que não iniciar um projeto com todas estas configurações já definidas.
+
+Starters -> Descritor de dependencia.
+
+Então o starter vai encapsular várias dependencias, então você não vai precisar adicionar todas as dependencias de uma biblioteca, você só precisa adicionar qual dependencia precisa, e logo todas serão adicionadas.
+
+Benefícios
+
+- Coesão
+- Versão compatível
+- Otimização do tempo
+- Configuração simples
+- Foco no negócio.
+
+----------------------
+Quem são eles?
+
+Quando usar @bean?
+Quando usar @component?
+Implementar a Ioc e DI
+
+levando em conta que tudo é beans no contexto do spring, quando iremos usar as anotações bean e a component?
+
+Uma dica chave: component -> componentes que serão escaneados na aplicação -> quando temos acesso ao código fonte na aplicação.
+
+Com isso, podemos injeta-lo em qualquer eco sistema do spring.
+
+Bean -> não é uma implemetnação, não é uma classe, não é algo que podemos ter acesso no código fonte, mas declaramos ele como bean para que o spring gerencie
+
+------------------------------------
+
+
+Singleton ou ProtoType
+
+ @Scope("prototype")
+ 
+ 
+-------------------------------
+
+Properties Value
+
+@Value
+Default value
+
+É bastante usado para quando querermos manter uma persistencia das informações que serão usadas na nossa aplicação, e também para usar váriaveis de ambiente.
+
+@Value("${}")
+
+
+----------------
+
+ConfigurationProperties
+
+@ConfigurationProperties(prefix)
+
+Podemos ter um componente onde ele vai estar atrelado a algumas configurações do ApplicationProperties
+
+exemplo de arquivo properties:
+
+remetente.nome=joao
+remetente.email=joao@ghmail.com
+remetente.telefone=1113913931L
+
+Podemos criar um componente, onde seus atributos vão ser automaticamente atributos com os valores da properties, Utilizando a anotação @ConfigurationProperties
+
+E a anotação@ConfigurationProperties, existe um atributo de prefixo, onde definimos o prefixo que vai ser usado para captar os valores da properties.
+
+@ConfigurationProperties(prefix = "remetente")
+
+
+----------------------------
+
+O que é ORM
+
+Object-Relational Mapping, Em portugues, mapeamento objeto-relacional, é um rescurso para aproximar o paradigma da orientação de objetos ao contexto de banco de dados relacional.
+
+O uso da ORM é realizado através do mapeamento de objeto para uma tabela por uma biblioteca ou framework
+
+JPA é uma especificação baseada em interfaces, que através de um framework realiza operações de persistencia de objetos em java
+
+Implementações do JPA
+
+Hibernate, eclipse link, Top link, Open Jpa
+
+Mapeamento
+
+Vamos conhecer os aspectos das anotações de mapeamento do jpa
+
+Identificação
+
+Definição
+Relacionamento
+Herança
+Persistencia
+
+
+-------------------------
+
+Spring data Jpa
+
+O spring data jpa adiciona uma camada sobre o JPA. Isso significa que ela usa todos os recursos definidos pela especificação JPA, especialmente os mapeamentos de entidade e os recursos de persistencia baseado em interfaces e anotações. Por isso, O spring data Jpa adiciona seus próprios recursos, como uma implementação sem código do padrão de reposítorio e criação de consultas de banco de dados a partir de nomes de métodos
+
+Então com o spring data jpa, as nossas interações com o banco de dados será através da herança de interfaces e declara~oes de métodos com anotações.
+
+Existem algumas interfaces e anotações que são super relevantes de se explorar como:
+
+Interfaces:
+    CrudRepository
+    JPARepository
+    PagingAndSortingRepository
+
+Anotações
+    @Query
+    @Param
+    
+
+-------------------------
+
+Repository Pattern
+
+Repository pattern é um padrão de projeto similar ao DAO (Data acess object) no sentido de que seu objetivo é abstrair o acesso a dados de forma genérica a partir do seu modelo.
+
+Spring Data Jpa
+    O spring Data Jpa facilita a implementação do padrão Repository através do AOP (Aspect Oriented Programming)
+    
+Então o Spring data jpa vai nos gerar dinamicamente a implementa~ao de vários métodos de acesso a dados. Então estender a interface JpaRepository vai nos fornecer já vários métodos de crud, sem precisar implementar todos eles.
+
+
+save, findByid, existsById, findAll, delete, count: todos esses são métodos que são fornecidos automaticamente pelo framework.
+
+----------------------------
+
+O que é uma API, é um código programável que faz a "ponte" entre duas aplicações distintas.
+
+REST e RESTful
+
+A API REST (representational state transfer) é como um guia de boas práticas e RESTful é a capacidade de determinado sistema aplicar os princípios rest.
+
+
+Para que uma arquitetura seja RESTful é necessário ter uma série de principios ou padroes.
+
+Cliente-servidor - Significa aprimorar a partabilidade dentre várias plataformas de interface do usuário e do servidor. Permitindo uma evolução independente do sistema
+
+
+Interface uniforma - representa uma interface uniforme entre cliente e servidor. Para isso é preciso ter uma interface que identifique e presente recursos, mensagens autodescritivas, bem como hypermedia (HATEOAS)
+
+stateless - indica que cada interação via API tem acesso a dados completos e compreensíveis.
+
+cache - necessário para reduzir o tempo médio de resposta, melhorar a eficiencia.
+
+camadas - permite que a arquitetura seja menos complexa e altamente flexivel.
+
+
+-------------------------------
+
+Nível de maturidade
+
+para padronizar e facilitar o devenvolvimento de api's REST, leonard richardson propes um modelo de maturidade para esse tipo de api, definindo em 4 niveis
+
+LEVEL 3: Hypermidia control
+level 2: HTTP verbs
+Level 1: recources
+Level 0: the swamp of POX
+
+HATEOAS
+
+HATEOAS significa Hypermedia as the engine of application state. Uma API que implementa esse nivel fornec3e aos seus clientes links que indicarão como poderá ser feita a navegação entre seus recursos. Ou seja, quem for consumir a API precisará saber apenas a rota principal e a resposta dessa requisição terá todas as demais rotas pssíveis.
+
+
+Controller
+
+Controller é um recurso que disponibiliza as funcionalidade de négocio da aplicação através do protocolo HTTP. Vamos criar uma classe de exemplo:
+
+
+Rest Controller
+
+Um rest controller em Spring nada mais é que uma classe contendo anotações específicar para dispolibilização de recursos https baseados em nosso serviços e regras de negócios.
+
+
+Swagger
+
+Configurando Documentação em uma API com swagger
+
+
+------------------------------
+
+Exception handlers
+
+Tratamento de exceções no spring boot
+
+
+Nossas aplicações precisam ser resilientes a possíveis comportamentos inesperados baseados na proposta de negócio e falando de recursos HTTPs, realizamos implementaçõesq ue centralizam e gerenciam esse tipo de tratamento de exceções.
+
+Exception Handler
+
+Um manipulador de exceção é o código que estipula o que um programa fará quando um evento anomalo interromper o fluxo normal das instruções desse programa.
+
+Solução 1- Exception Handler
+
+A primeira solução funciona a nivel do @Controller, onde cada método trata uma exceção de forma declarativa com o @ExceptionHandler(minhaException.cass)
+
+@ResponseStatusExceptionResolver
+
+Sua principal responsabilidade é usar a anotação @ResponseStatus disponível em exceções personalizada e mapear essas exeções de status http.
+
+
+RestControllerAdvice
+
+O spring 3.2 traz um suporte para o exceptionHandler global com a anotação @ControllerAdvice
+
+A anotação ControllerAdvice nos permite consolidar nossos múltiplos @Exceptionhandlers espalahaos de antes, em um único componente global para tratamento de erros.
+
+Isso nos dá controle total sobre o corpo da resposta, bem como o código de status
+
+Isso nos dá controle total sobre o corpo da resposta, bem como o código de status
+Ele fornece o mapeamento de várias exceções ao mesmo método, para serem tratas em conjunto
+Ele faz bom uso da resposta RESTful ResponseEntity mais recente.
+
+
+--------------------
+
+Introdução
+
+Spring security é apenas um grupo de filtros de servlet que ajudam você a dicionar autenticação e autorização ao seu aplicativo da WEB.
+
+
+Autenticação: refere ao processo de verificação de identidade de um usuário, com base nas credenciais fornecidas. Um exemplo comum é inserir um nome de usuário e uma senha ao fazer login em um site. Você pode pensar nisso como uma resposta a pergunta: Quem é você?
+
+Autorização: Se refere ao processo de determinar se um usuário tem permissão adequada para executção uma açlão específica ou ler dados específico, supondo que o usuário seja autenticado com exito. Você pode pensar nisso como uma resposta à pergunta Um usuário pode fazer / ler isso?
+
+Princípio/principle: refere-se ao usuário autenticado no momento.
+
+Autoridade concedida refere-se à permissão do usuário autenticado.
+
+Função refere-se a um grupo de permissões do usuário autenticado.
+
+--------------------
+
+Para habilitar a segurança ao nosso projeto spring, precisamos incluir a dependencia no pom.xml do spring security
+
+spring-boot-start-security /artifactId>
+
+
+Default
+
+O spring securiy possui um usuário padrão chamado user e toda vez que a sua aplicação é iniciada, ele gera uma senha aleatória no console.
+
+--------
+
+
+
+
