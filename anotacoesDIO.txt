@@ -1316,5 +1316,79 @@ O spring securiy possui um usuário padrão chamado user e toda vez que a sua ap
 --------
 
 
+Autenticação simples
+
+
+Existe uma maneira da gente realizar uma autenticação simples do spring, não é recomendada, mas podemos saber que ela existe
+
+No aplication properties, iremos colocar as seguintes anotações
+
+spring:
+    security:
+        user:
+            name = user
+            password = user123
+            roles = USERS
+
+Dessa forma a gente consegue gerar uma autenticação com um login e senha
+
+-------------------------------
+
+UserDetailsService
+
+A interface UserDetails service é usada pra recuperar dados relacionados ao usuário. Ele possui um método denominado loadByUsername() que pode ser substrituido para personalizar o processo de lcoalização do usuário
+
+
+-------------------------------
+
+Explorando padrões de projetos design patterns
+
+
+O que são design patterns
+
+São soluções consolidadas para problemas recorrentes no desenvolvimento e manutenção de software orientado a objetos.
+
+São comumentes classificados nas seguintes categorias
+
+Padrões criacionais: Abstract Factory, Builder, Factory method, Prototype, Singleton.
+
+Padrões comportamentais: Chain of Responsibility, Iterator, Observer, Stategy, template method.
+
+Padrões Estruturais: Adapter, bridge, Composite, Decorator, Facada, Flyweight, Proxy.
+
+----------------------------------
+Padrão criacional
+Singleton
+
+Permitir a criação de uma única instâNcia de uma classe e fornecer um modo para recuperá-la.
+
+
+----------------------------------
+Padrão comportamental
+Strategy
+
+Simplificar a variação de algoritmos para a resolução de um mesmo problema.
+
+----------------------------------
+Padrão estrutural
+Facade
+
+Prover uma interface que reduza a complexidade nas integrações com subsistemas
+
+
+-----------------------------
+
+Spring framework
+
+Explorando alguns padrões de projetos com Spring:
+
+Singleton: @Bean e @Autowired
+
+Strategy: @Service e @Repository
+
+Facade: construiremos uma API REST com o mesmo objetivo desse padrão, abstrair a compelxidades das seguintes integrações: Spring data JPa e ViaCEP(Feign).
+
+
+
 
 
